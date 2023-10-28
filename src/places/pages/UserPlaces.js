@@ -18,7 +18,7 @@ const DUMMYPLACES = [
   },
   {
     id: "p2",
-    title: "Empire state",
+    title: "Empire2 state",
     description: "tallest in the world ",
     imageUrl:
       "https://images.pexels.com/photos/18424236/pexels-photo-18424236/free-photo-of-wood-light-house-architecture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

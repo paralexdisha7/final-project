@@ -2,13 +2,14 @@ import React from "react";
 import "./PlaceList.css";
 import Card from "../../shared/components/UiElements/Card";
 import Placeitem from "./Placeitem";
+import Button from "../../shared/components/FormElements/Button";
 const PlaceList = (props) => {
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
         <Card>
           <h2>No places Found. Create one?</h2>
-          <button>Add a Place</button>
+          <Button to="/places/new">Add a Place</Button>
         </Card>
       </div>
     );

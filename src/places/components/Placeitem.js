@@ -7,11 +7,25 @@ import Modal from "../../shared/components/UiElements/Modal";
 const Placeitem = (props) => {
   const [showMap, setShowMap] = useState(false);
 
+  const [showConf, setShowConf] = useState(false);
+
   const openMapHandler = () => {
     setShowMap(true);
   };
   const closeMapHandler = () => {
     setShowMap(false);
+  };
+
+  const showDeleteWarningHandler = () => {
+    setShowConf(true);
+  };
+  const cancelDeleteWarningHandler = () => {
+    setShowConf(false);
+  };
+
+  const confirmDeleteHandler = () => {
+    setShowConf(false)
+    console.log("DELETING...");
   };
   return (
     <>
@@ -27,6 +41,20 @@ const Placeitem = (props) => {
           <h2>The Map</h2>
         </div>
       </Modal>
+      <Modal
+      show={showConf}
+      onCancel={cancelDeleteWarningHandler}
+        header="Are you sure?"
+        footerClass="place-item__modal-actions"
+        footer={
+          <>
+            <Button inverse onClick={cancelDeleteWarningHandler}> Cancel</Button>
+            <Button danger onClick={confirmDeleteHandler}>Confirm</Button>
+          </>
+        }
+      >
+        <p>Are you Sure? Cannot br undone.</p>
+      </Modal>
       <ul className="place-item">
         <Card className="place-item__content">
           <div className="place-item__image">
@@ -38,9 +66,12 @@ const Placeitem = (props) => {
             <p>{props.description} </p>
           </div>
           <div className="place-item__actions">
-            <Button inverse onClick={openMapHandler}> View on Map </Button>
+            <Button inverse onClick={openMapHandler}>
+              {" "}
+              View on Map{" "}
+            </Button>
             <Button to={`/places/${props.id}`}> Edit </Button>
-            <Button danger> Delete </Button>
+            <Button danger onClick={showDeleteWarningHandler}> Delete </Button>
           </div>
         </Card>
       </ul>
