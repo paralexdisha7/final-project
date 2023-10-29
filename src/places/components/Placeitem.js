@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./PlaceItem.css";
 import Card from "../../shared/components/UiElements/Card";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UiElements/Modal";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const Placeitem = (props) => {
   const [showMap, setShowMap] = useState(false);
@@ -24,9 +25,11 @@ const Placeitem = (props) => {
   };
 
   const confirmDeleteHandler = () => {
-    setShowConf(false)
+    setShowConf(false);
     console.log("DELETING...");
   };
+
+  const auth = useContext(AuthContext);
   return (
     <>
       <Modal
@@ -42,14 +45,19 @@ const Placeitem = (props) => {
         </div>
       </Modal>
       <Modal
-      show={showConf}
-      onCancel={cancelDeleteWarningHandler}
+        show={showConf}
+        onCancel={cancelDeleteWarningHandler}
         header="Are you sure?"
         footerClass="place-item__modal-actions"
         footer={
           <>
-            <Button inverse onClick={cancelDeleteWarningHandler}> Cancel</Button>
-            <Button danger onClick={confirmDeleteHandler}>Confirm</Button>
+            <Button inverse onClick={cancelDeleteWarningHandler}>
+              {" "}
+              Cancel
+            </Button>
+            <Button danger onClick={confirmDeleteHandler}>
+              Confirm
+            </Button>
           </>
         }
       >
@@ -70,8 +78,16 @@ const Placeitem = (props) => {
               {" "}
               View on Map{" "}
             </Button>
-            <Button to={`/places/${props.id}`}> Edit </Button>
-            <Button danger onClick={showDeleteWarningHandler}> Delete </Button>
+            {auth.isLoggedIn && (
+              <Button to={`/places/${props.id}`}> Edit </Button>
+            )}
+
+            {auth.isLoggedIn && (
+              <Button danger onClick={showDeleteWarningHandler}>
+                {" "}
+                Delete{" "}
+              </Button>
+            )}
           </div>
         </Card>
       </ul>
