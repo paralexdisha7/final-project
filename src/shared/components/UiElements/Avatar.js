@@ -1,5 +1,5 @@
 import React from 'react';
-
+// import disha from '.'
 import './Avatar.css';
 
 const Avatar = props => {
